@@ -16,8 +16,3 @@ main_line.AddWinget(val)
 main_line.AddWinget(times)
 main_line.AddWinget(result)
 main_line.AddWinget(vidpovid)
-
-
-
-window.show()
-app.exec()
