@@ -7,26 +7,42 @@ window = QWidget()
 
 app.setStyleSheet(""" 
          QWidget {
-             background : #FFFFFF;
+             background-color: #00FFFF;
              
         } 
         
         QPushButton
-        
         {
-            backgoround-color: #00FFFF;
+            background-color: #00FF00;
             border-style: outset;
             border-width: 5px;
             border-color:black;
-            border-radius: 10px:
-            font-family: Roboto;
+            border-radius: 10px;
+            font-family: fantasy;
+            font-size: 13px;
             min-width: 59px;
             min-height:40px;
-            color: red
-            paddig: 6px;
+            color: red;
+            padding: 6px;
     
         }   
-                 
+        
+        QLineEdit
+        {
+            background-color: #00FF00;
+            border-style: outset;
+            border-width: 5px;
+            border-color:black;
+            border-radius: 10px;
+            font-family: fantasy;
+            font-size: 12px;
+            min-width: 65px;
+            min-height:40px;
+            color: red;
+            padding: 6px;
+    
+        }
+                             
     """)
 
 
@@ -63,4 +79,33 @@ main_line.addWidget(vidpovid)
 
 window.setLayout(main_line)
 window.show()
+
+def valuta():
+    val = val_input.text()
+    if val.lower() != "uah":
+        response = requests.get(
+            f"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode={val}&&json"
+        )
+        data = response.json()
+        print(data)
+        inputreyt = data[0]["rate"]
+    else:
+        inputreyt = 1
+
+    out = times_input.text()
+    if out.lower() != "uah":
+        response = requests.get(
+            f"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode={out}&&json"
+        )
+        data = response.json()
+        print(data)
+        outreyt = data[0]["rate"]
+    else:
+        outreyt = 1
+
+    rate = outreyt/inputreyt
+    kilkist = float(cilcict_input.text())
+    result_input.setText(str(rate*kilkist))
+
+vidpovid.clicked.connect(valuta)
 app.exec()
