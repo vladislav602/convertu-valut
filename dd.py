@@ -1,6 +1,8 @@
 import requests
 from PyQt5.QtWidgets import*
 
+
+
 app = QApplication([])
 window = QWidget()
 
@@ -46,6 +48,14 @@ app.setStyleSheet("""
     """)
 
 
+
+A = {
+    "Австралійський долар""AUD",
+    "ДОЛАР США""USD"
+    "ПОЛЬСЬКИЙ ЗЛОТИЙ""PLN",
+    "українська гривня""UAH"
+    "ТУРЕЦЬКФ ЛІРА""TRY",
+   }
 
 
 val_input = QLineEdit()
@@ -93,7 +103,7 @@ def valuta():
         inputreyt = 1
 
     out = times_input.text()
-    if out.lower() != "uah":
+    if out.lower() != "uah,usd,eur":
         response = requests.get(
             f"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode={out}&&json"
         )
